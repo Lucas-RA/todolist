@@ -223,7 +223,7 @@ fun FormularioTarefaContent(
                     }
                 }
             }
-        }
+
             Button(
                 onClick = {
                     val dataHora = if (temDataHora) {
@@ -238,6 +238,7 @@ fun FormularioTarefaContent(
             ) {
                 Text("Salvar")
             }
+        }
         }
     }
 
