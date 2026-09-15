@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.Flow
 //interface pois será implementada por outra classe
 interface TarefaDAO{
     // marcamos a query que vai executar quando executar a função
-    @Query("SELECT * FROM tarefas ORDER BY dataCriacao DESC")
+//    query ajustada para considerar a dataCriacao e dataHora no select de exibição
+    @Query("SELECT * FROM tarefas ORDER BY dataHora IS NULL, dataHora ASC, dataCriacao DESC")
     //obrigatoriamente quem implementar essa classe terá essa assinatura aqui
     fun listarTodas(): Flow<List<Tarefa>>
 

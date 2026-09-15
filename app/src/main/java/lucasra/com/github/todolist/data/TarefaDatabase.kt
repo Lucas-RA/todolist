@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 
 //conexão com banco de dados
-@Database(entities = [Tarefa::class], version = 1, exportSchema = false)
+@Database(entities = [Tarefa::class], version = 2, exportSchema = false)
 //classe abstrata - não vai instanciar objeto - só pode ser herdada
 abstract class TarefaDatabase : RoomDatabase(){ // herda da dependência que vai criar o BD - RoomDatabase
     //função abstrata que herda da TarefaDAO
@@ -28,7 +28,9 @@ abstract class TarefaDatabase : RoomDatabase(){ // herda da dependência que vai
                 TarefaDatabase::class.java,
                 //nome do banco de dados
                 "tarefas.db"
-            ).build().also {INSTANCE = it} // para criar sempre
+            ).fallbackToDestructiveMigration(dropAllTables = true)
+                    .build()
+                    .also {INSTANCE = it} // para criar sempre
             }
         }
     }
